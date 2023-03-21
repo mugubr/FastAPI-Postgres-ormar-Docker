@@ -2,11 +2,12 @@ import datetime
 
 import ormar
 
-from ..db import ormar_database
-
-class User(ormar_database):
+from app.db import database, metadata
+class User(ormar.Model):
     class Meta:
         tablename = "users"
+        database = database
+        metadata = metadata
 
     id: int = ormar.Integer(primary_key=True, autoincrement=True)
     cpf: str = ormar.String(max_length=11, unique=True)
