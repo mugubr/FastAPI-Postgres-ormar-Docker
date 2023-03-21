@@ -8,7 +8,7 @@ router = APIRouter()
 
 @router.post("/users", response_model=User)
 async def create_user(user: User):
-    query = User(name=user.nome, email=user.email)
+    query = User(nome=user.nome, email=user.email, cpf=user.cpf, telefone=user.telefone)
     await query.save()
     return query
 
@@ -29,7 +29,7 @@ async def update_user(user_id: int, user: User):
     query = await User.objects.get(id=user_id)
     if not query:
         raise HTTPException(status_code=404, detail="Usuário não encontrado")
-    await query.update(name=user.name, email=user.email)
+    await query.update(nome=user.nome, email=user.email)
     return {"message": "User updated successfully"}
 
 @router.delete("/users/{user_id}")
