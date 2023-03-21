@@ -6,7 +6,7 @@ from ..models.user_model import User
 
 router = APIRouter()
 
-@router.post("/create_an_user", response_model=User, description='Criar Usuário', summary='Criar Usuário')
+@router.post("/create_an_user", response_model=User, description='Criar um usuário', summary='Criar um usuário')
 async def create_user(user: User):
     new_user = await User.objects.create(**user.dict(exclude_unset=True))
     return new_user
@@ -38,7 +38,7 @@ async def update_user(user_id: int, user: User):
     return current_user
 
 
-@router.delete("/delete_an_user/{user_id}", response_model=None, description='Deletar um usuário pelo ID', summary='Deletar um usuário pelo ID')
+@router.delete("/delete_an_user/{user_id}", response_model=None, description='Excluir um usuário pelo ID', summary='Excluir um usuário pelo ID')
 async def delete_user(user_id: int):
     user = await User.objects.get_or_none(id=user_id)
     if user is None:
